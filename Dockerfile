@@ -16,6 +16,14 @@ RUN ln -s /usr/lib/x86_64-linux-gnu/libssl.so /usr/lib
 
 WORKDIR /home/
 
+RUN tar -zx /home/php-7.1.26.tar.gz -o /home/ \
+    && tar -zx /home/redis-4.2.0.tgz -o /home/ \
+    && tar -zx /home/mongodb-1.5.3.tgz -o /home/ \
+    && tar -zx /home/swoole-4.2.13.tgz -o /home/ \
+    && tar -zx /home/zookeeper-3.4.13.tar.gz -o /home/ \
+    && tar -zx /home/zookeeper-0.6.3.tgz -o /home/ \
+    && ls -al /home/
+
 RUN cd /home/php-7.1.26/ &&\
     ./configure \
     --prefix=/usr/local/php \
