@@ -16,7 +16,8 @@ RUN ln -s /usr/lib/x86_64-linux-gnu/libssl.so /usr/lib
 
 WORKDIR /home/
 
-RUN tar -zxf /home/php-7.1.26.tar.gz -o /home/ \
+RUN cd /home/ \
+    && tar -zxf /home/php-7.1.26.tar.gz -o /home/ \
     && tar -zxf /home/redis-4.2.0.tgz -o /home/ \
     && tar -zxf /home/mongodb-1.5.3.tgz -o /home/ \
     && tar -zxf /home/swoole-4.2.13.tgz -o /home/ \
