@@ -11,7 +11,8 @@ ADD https://pecl.php.net/get/zookeeper-0.6.3.tgz /home/
 
 WORKDIR /home/
 
-RUN tar -zxf /home/php-7.1.26.tar.gz -o /home/ \
+RUN ls -al /home/ \
+    && tar -zxf /home/php-7.1.26.tar.gz -o /home/ \
     && tar -zxf /home/redis-4.2.0.tgz -o /home/ \
     && tar -zxf /home/mongodb-1.5.3.tgz -o /home/ \
     && tar -zxf /home/swoole-4.2.13.tgz -o /home/ \
