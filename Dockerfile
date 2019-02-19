@@ -1,11 +1,11 @@
+FROM ubuntu:16.04 as builder
+
+LABEL maintainer="Alan <ssisoo@live.cn>"
+
 ARG PHP_URL=http://hk1.php.net/get/php-7.3.2.tar.gz/from/this/mirror
 ARG PHP_VERSION=php-7.3.2
 ARG PHP_PACKAGE=mirror
 ARG LIB_LIST="libxml2-dev libssl-dev libbz2-dev libpng-dev libxslt1-dev libcurl4-openssl-dev libzip-dev"
-
-FROM ubuntu:16.04 as builder
-
-LABEL maintainer="Alan <ssisoo@live.cn>"
 
 RUN apt-get update -y
 RUN apt-get install -y gcc g++ autoconf make file bison curl git zip unzip ${LIB_LIST}
@@ -24,7 +24,7 @@ ADD https://pecl.php.net/get/zookeeper-0.6.3.tgz /home/
 
 WORKDIR /home/
 
-RUN cd /home/ \
+RUN cd /home/${PHP_VERSION} \
     && tar -zxf /home/re2c-0.16.tar.gz -C /home/ \
     && tar -zxf /home/${PHP_PACKAGE} -C /home/ \
     && tar -zxf /home/redis-4.2.0.tgz -C /home/ \
@@ -99,6 +99,8 @@ RUN cd /home/zookeeper-0.6.3/ \
 FROM ubuntu:16.04
 
 LABEL maintainer="Alan <ssisoo@live.cn>"
+
+ARG LIB_LIST="libxml2-dev libssl-dev libbz2-dev libpng-dev libxslt1-dev libcurl4-openssl-dev libzip-dev"
 
 RUN apt-get update -y \
     && ${LIB_LIST} \
