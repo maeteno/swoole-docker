@@ -7,7 +7,7 @@ RUN apt-get install -y gcc g++ autoconf make file bison curl git zip unzip \
     libxml2-dev libssl-dev libbz2-dev libpng-dev libxslt1-dev libcurl4-openssl-dev libzip-dev libzip4
 RUN ln -s /usr/lib/x86_64-linux-gnu/libssl.so /usr/lib
 
-ARG PHP_URL=http://hk1.php.net/get/php-7.2.15.tar.gz/from/this/mirror
+ARG PHP_URL=http://hk1.php.net/get/php-7.2.19.tar.gz/from/this/mirror
 ARG PHP_VERSION=php-7.2.15
 ARG PHP_PACKAGE=mirror
 
@@ -15,22 +15,22 @@ ARG PHP_PACKAGE=mirror
 # re2c php 编译需要
 ADD https://nchc.dl.sourceforge.net/project/re2c/0.16/re2c-0.16.tar.gz /home/
 ADD ${PHP_URL} /home/
-ADD https://pecl.php.net/get/redis-4.2.0.tgz /home/
-ADD https://pecl.php.net/get/mongodb-1.5.3.tgz /home/
-ADD https://pecl.php.net/get/swoole-4.2.13.tgz /home/
+ADD https://pecl.php.net/get/redis-4.3.0.tgz /home/
+ADD https://pecl.php.net/get/mongodb-1.5.5.tgz /home/
+ADD https://pecl.php.net/get/swoole-4.3.5.tgz /home/
 ADD http://apache.01link.hk/zookeeper/zookeeper-3.4.13/zookeeper-3.4.13.tar.gz /home/
-ADD https://pecl.php.net/get/zookeeper-0.6.3.tgz /home/
+ADD https://pecl.php.net/get/zookeeper-0.6.4.tgz /home/
 
 WORKDIR /home/
 
 RUN cd /home/ \
     && tar -zxf /home/re2c-0.16.tar.gz -C /home/ \
     && tar -zxf /home/${PHP_PACKAGE} -C /home/ \
-    && tar -zxf /home/redis-4.2.0.tgz -C /home/ \
-    && tar -zxf /home/mongodb-1.5.3.tgz -C /home/ \
-    && tar -zxf /home/swoole-4.2.13.tgz -C /home/ \
+    && tar -zxf /home/redis-4.3.0.tgz -C /home/ \
+    && tar -zxf /home/mongodb-1.5.5.tgz -C /home/ \
+    && tar -zxf /home/swoole-4.3.5.tgz -C /home/ \
     && tar -zxf /home/zookeeper-3.4.13.tar.gz -C /home/ \
-    && tar -zxf /home/zookeeper-0.6.3.tgz -C /home/ \
+    && tar -zxf /home/zookeeper-0.6.4.tgz -C /home/ \
     && ls -al /home/
 
 RUN cd /home/re2c-0.16/ \
@@ -72,15 +72,15 @@ RUN cd /home/${PHP_VERSION}/ &&\
 
 ENV PATH=$PATH:/usr/local/php/bin
 
-RUN cd /home/redis-4.2.0/ \
+RUN cd /home/redis-4.3.0/ \
     && phpize && ./configure && make && make install \
     && echo "extension=redis.so" >> /usr/local/php/etc/php.ini
 
-RUN cd /home/mongodb-1.5.3/ \
+RUN cd /home/mongodb-1.5.5/ \
     && phpize && ./configure && make && make install \
     && echo "extension=mongodb.so" >> /usr/local/php/etc/php.ini
 
-RUN cd /home/swoole-4.2.13/ \
+RUN cd /home/swoole-4.3.5/ \
     && phpize && ./configure --enable-sockets --enable-openssl --enable-mysqlnd \
     && make && make install \
     && echo "extension=swoole.so" >> /usr/local/php/etc/php.ini
@@ -89,7 +89,7 @@ RUN cd /home/zookeeper-3.4.13/src/c \
     && ./configure --prefix=/usr/local/zookeeper \
     && make && make install 
 
-RUN cd /home/zookeeper-0.6.3/ \
+RUN cd /home/zookeeper-0.6.4/ \
     && phpize && ./configure --with-libzookeeper-dir=/usr/local/zookeeper \
     && make && make install \
     && echo "extension=zookeeper.so" >> /usr/local/php/etc/php.ini
