@@ -18,7 +18,7 @@ ADD ${PHP_URL} /home/
 ADD https://pecl.php.net/get/redis-4.3.0.tgz /home/
 ADD https://pecl.php.net/get/mongodb-1.5.5.tgz /home/
 ADD https://pecl.php.net/get/swoole-4.3.5.tgz /home/
-ADD http://apache.01link.hk/zookeeper/zookeeper-3.4.13/zookeeper-3.4.13.tar.gz /home/
+ADD https://archive.apache.org/dist/zookeeper/zookeeper-3.4.13/zookeeper-3.4.13.tar.gz /home/
 ADD https://pecl.php.net/get/zookeeper-0.6.4.tgz /home/
 
 WORKDIR /home/
