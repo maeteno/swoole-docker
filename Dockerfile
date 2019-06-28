@@ -8,7 +8,7 @@ RUN apt-get install -y gcc g++ autoconf make file bison curl git zip unzip \
 RUN ln -s /usr/lib/x86_64-linux-gnu/libssl.so /usr/lib
 
 ARG PHP_URL=http://hk1.php.net/get/php-7.2.19.tar.gz/from/this/mirror
-ARG PHP_VERSION=php-7.2.15
+ARG PHP_VERSION=php-7.2.19
 ARG PHP_PACKAGE=mirror
 
 # 以下下载链接失效可以到 https://github.com/maeteno/php-software-package 获取备份
